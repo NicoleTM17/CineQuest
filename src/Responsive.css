@@ -1,0 +1,57 @@
+
+@media (max-width: 960px){
+
+  .logo{
+    width: 35%;
+  }
+
+  .movies-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .movie-card{
+    width: 50%;
+    height: 100%;
+  }
+}
+
+
+@media (max-width: 720px){
+
+  .logo{
+    width: 40%;
+  }
+}
+
+
+@media (max-width: 540px){
+  .logo{
+    width: 50%;
+  }
+
+  .search-input{
+    width: 60%;
+    font-size: 0.7em;
+  }
+
+  .search-btn{
+    font-size: 0.7em;
+  }
+
+  .banner-wrapper{
+    height: 400px;
+  }
+
+  .movies-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .movie-card{
+    width: 70%;
+    height: 100%;
+  }
+}

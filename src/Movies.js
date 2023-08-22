@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 
 import './Movies.css';
+import './Responsive.css';
 
 
 function Movies(){
