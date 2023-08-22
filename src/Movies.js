@@ -27,7 +27,7 @@ function Movies(){
     setTitle(searchInput); // defining the movie title
 
     setSearchError(false);
-    setResultsTitle(false);
+    // setResultsTitle(false);
   };
 
 
@@ -44,14 +44,18 @@ function Movies(){
       fetch(`http://www.omdbapi.com/?s=${title}&apikey=${apiKey}`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
-        setMovies(data.Search);
-        setFormattedTitle(title);
+        if (data.Response === "False"){
+          console.log('No results!');
+          setSearchError(true);
+          setMovies([]);
+        } else {
+          // console.log(data);
+          setMovies(data.Search);
+          setFormattedTitle(title);
+          setResultsTitle(true);
 
-        setResultsTitle(true);
-        setFormSubmitted(false);
-        setSearchError(false);
-        setTitle(''); // clear input field after form submission
+          setSearchError(false);
+        }
       })
 
       .catch((error) => {
@@ -59,7 +63,10 @@ function Movies(){
         setSearchError(true);
         setResultsTitle(false);
       })
-
+      .finally(() => {
+        setFormSubmitted(false);
+        setTitle(''); // clear input field after form submission
+      })
     }
   }, [apiKey, title, formSubmitted]);
 
@@ -83,8 +90,10 @@ function Movies(){
       </div>
 
       {/* MOVIE CARDS SECTION BELOW */}
-      <p className={searchError === true || movies.length === 0 ? 'search-results' : 'search-results-hidden'}>No search results</p>
-      <h3 className={resultsTitle === true && movies.length > 0 ? 'results-title' : 'results-title-hidden'}>{movies.length} search results for <strong>{formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1)}</strong></h3>
+      {searchError === true && <p className='search-results'>No search results</p>}
+      {resultsTitle && movies && movies.length > 0 ? (
+      <h3 className='results-title'>{`${movies.length} search results for ${formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1)}`}</h3>
+      ) : null}
 
       <div className='movies-wrapper'>
         {movies && movies.length > 0 ? (
