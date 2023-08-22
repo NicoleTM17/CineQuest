@@ -5,18 +5,18 @@ import { useState, useEffect } from 'react';
 
 import './Movies.css';
 
-const featuredMovies = [
-  {poster: 'https://m.media-amazon.com/images/I/71ivyTtPwoL._AC_UF894,1000_QL80_.jpg', title: 'Seven', year: '1995', plot: 'Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.', imdbid: 'tt0114369'},
-  {poster: 'https://i.ebayimg.com/images/g/no4AAOSw7R1hC-Sd/s-l400.jpg', title: 'Children of Men', year: '2006', plot: 'In 2027, in a chaotic world in which women have somehow become infertile, a former activist agrees to help transport a miraculously pregnant woman to a sanctuary at sea.', imdbid: 'tt0206634'},
-  {poster: 'https://m.media-amazon.com/images/I/51cO5+2S4zL._AC_UF894,1000_QL80_.jpg', title: 'Spirited Away', year: '2001', plot: 'During her familys move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches and spirits, a world where humans are changed into beasts.', imdbid: 'tt0245429'},
-  {poster: 'https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg', title: 'Shrek 2', year: '2004', plot: 'Shrek and Fiona travel to the Kingdom of Far Far Away, where Fionas parents are King and Queen, to celebrate their marriage. When they arrive, they find they are not as welcome as they thought they would be.', imdbid: 'tt0298148'},
-  {poster: 'https://m.media-amazon.com/images/M/MV5BYmU4NTk4OWYtMjE4My00MGVkLTgwY2EtZTZjN2YyOGFiMDQ0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg', title: 'Freaky Friday', year: '2003', plot: 'An overworked mother and her daughter did not get along. When they switch bodies, each is forced to adapt to the others life for one freaky Friday.', imdbid: 'tt0322330'},
-  {poster: 'https://i.ebayimg.com/images/g/PgoAAOSwtglcabvE/s-l1200.jpg', title: 'The Hunger Games', year: '2012', plot: 'Katniss Everdeen voluntarily takes her younger sisters place in the Hunger Games: a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.', imdbid: 'tt1392170'}
-]
 
 function Movies(){
   const apiKey = process.env.REACT_APP_API_OMDB_API_KEY;
 
+  const featuredMovies = [
+    {poster: 'https://m.media-amazon.com/images/I/71ivyTtPwoL._AC_UF894,1000_QL80_.jpg', title: 'Seven', year: '1995', plot: 'Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.', imdbid: 'tt0114369'},
+    {poster: 'https://i.ebayimg.com/images/g/no4AAOSw7R1hC-Sd/s-l400.jpg', title: 'Children of Men', year: '2006', plot: 'In 2027, in a chaotic world in which women have somehow become infertile, a former activist agrees to help transport a miraculously pregnant woman to a sanctuary at sea.', imdbid: 'tt0206634'},
+    {poster: 'https://m.media-amazon.com/images/I/71nSF+pVrTL._AC_UF894,1000_QL80_.jpg', title: 'Spirited Away', year: '2001', plot: 'During her familys move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches and spirits, a world where humans are changed into beasts.', imdbid: 'tt0245429'},
+    {poster: 'https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg', title: 'Shrek 2', year: '2004', plot: 'Shrek and Fiona travel to the Kingdom of Far Far Away, where Fionas parents are King and Queen, to celebrate their marriage. When they arrive, they find they are not as welcome as they thought they would be.', imdbid: 'tt0298148'},
+    {poster: 'https://m.media-amazon.com/images/M/MV5BYmU4NTk4OWYtMjE4My00MGVkLTgwY2EtZTZjN2YyOGFiMDQ0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg', title: 'Freaky Friday', year: '2003', plot: 'An overworked mother and her daughter did not get along. When they switch bodies, each is forced to adapt to the others life for one freaky Friday.', imdbid: 'tt0322330'},
+    {poster: 'https://i.ebayimg.com/images/g/PgoAAOSwtglcabvE/s-l1200.jpg', title: 'The Hunger Games', year: '2012', plot: 'Katniss Everdeen voluntarily takes her younger sisters place in the Hunger Games: a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.', imdbid: 'tt1392170'}
+  ]
   // User must type in valid movie title
   // Should return title, year, plot, base url and poster
   // to do url https://www.imdb.com/title/${url.imdbID}
@@ -108,7 +108,7 @@ function Movies(){
         {movies && movies.length > 0 ? (
 
           movies.map((movie, index) => (
-            <Card className='movie-card'>
+            <Card className='movie-card' key={index}>
               <Card.Img className='movie-img' src={movie.Poster !== 'N/A' ? movie.Poster : 'https://s3.amazonaws.com/shecodesio-production/uploads/files/000/094/199/original/fd2d9f4640394679d65967c13ec0de2c.jpg?1692633511'} alt='movie-poster'/>
               <Card.Body className='content'>
                 <Card.Text className='movie-title'>{movie.Title}</Card.Text>
@@ -120,7 +120,19 @@ function Movies(){
 
           ))
         ) : (
-          <></>
+          <>
+            {featuredMovies.map((fmovie, index) => (
+              <Card className='movie-card' key={index}>
+                <Card.Img className='movie-img' src={fmovie.poster} alt='movie-poster'/>
+                <Card.Body className='content'>
+                  <Card.Text className='movie-title'>{fmovie.title}</Card.Text>
+                  <Card.Text className='movie-year'>{fmovie.year}</Card.Text>
+                  {/* <Card.Text className='movie-plot'>{fmovie.plot}</Card.Text> */}
+                  <a href={`https://www.imdb.com/title/${fmovie.imdbid}`} target='_blank' rel="noreferrer"><Button className='movie-btn'>View on imdb</Button></a>
+                </Card.Body>
+              </Card>
+            ))}
+          </>
         )}
       </div>
 
