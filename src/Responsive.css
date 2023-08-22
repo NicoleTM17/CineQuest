@@ -44,6 +44,11 @@
     height: 400px;
   }
 
+  .results-title{
+    font-size: 0.75em;
+    text-align: center;
+  }
+
   .movies-wrapper{
     display: flex;
     justify-content: center;
