@@ -52,7 +52,7 @@ function Movies(){
   useEffect(() => {
     if (formSubmitted && title) {
       console.log('Fetching data...');
-      fetch(`http://www.omdbapi.com/?s=${title}&apikey=${apiKey}`)
+      fetch(`https://www.omdbapi.com/?s=${title}&apikey=${apiKey}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.Response === "False"){
