@@ -1,6 +1,7 @@
 import { Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import React from 'react';
 
 
 import './Movies.css';
@@ -55,7 +56,7 @@ function Movies(){
       .then((response) => response.json())
       .then((data) => {
         if (data.Response === "False"){
-          console.log('No results!');
+          // console.log('No results!');
           setSearchError(true);
           setMovies([]);
         } else {
@@ -102,7 +103,8 @@ function Movies(){
       {/* MOVIE CARDS SECTION BELOW */}
       {searchError === true && <p className='search-results'>No search results</p>}
       {resultsTitle && movies && movies.length > 0 ? (
-      <h3 className='results-title'>{`${movies.length} search results for ${formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1)}`}</h3>
+      <h3 className='results-title'>
+        <React.Fragment>{movies.length} search results for <strong>{formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1)}</strong></React.Fragment></h3>
       ) : null}
 
       <div className='movies-wrapper'>
